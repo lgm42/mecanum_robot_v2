@@ -135,6 +135,7 @@ namespace mecanumRobotV2 {
     //% block="Initialize robot"
     export function initializeRobot() {
         irRemote.connectInfrared(DigitalPin.P0)
+        led.enable(false)
     }
 
     /**
