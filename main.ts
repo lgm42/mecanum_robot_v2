@@ -74,6 +74,13 @@ enum MD {
     Back = 1
 }
 
+enum StrafeDirection {
+    //% block="Left"
+    Left,
+    //% block="Right"
+    Right,
+}
+
 enum LT {
     //% block="Left"
     Left,
@@ -204,6 +211,64 @@ namespace mecanumRobotV2 {
 
     }
 
+    /**
+     * drive robot
+     */
+    //% block="Drive to $D at speed $speed \\%"
+    //% speed.min=0 speed.max=100
+    //% group="Motor" weight=95
+    export function Drive(direction: DIR,  speed: number) {
+        switch (direction)
+        {
+            case DIR.Run_forward:
+                Motor(LR.Upper_left, MD.Forward, speed);
+                Motor(LR.Upper_right, MD.Forward, speed);
+                Motor(LR.Lower_left, MD.Forward, speed);
+                Motor(LR.Lower_right, MD.Forward, speed);
+            break;
+            case DIR.Run_back:
+                Motor(LR.Upper_left, MD.Back, speed);
+                Motor(LR.Upper_right, MD.Back, speed);
+                Motor(LR.Lower_left, MD.Back, speed);
+                Motor(LR.Lower_right, MD.Back, speed);
+            break;
+            case DIR.Turn_Left:
+                Motor(LR.Upper_left, MD.Back, speed);
+                Motor(LR.Upper_right, MD.Forward, speed);
+                Motor(LR.Lower_left, MD.Back, speed);
+                Motor(LR.Lower_right, MD.Forward, speed);
+            break;
+            case DIR.Turn_Right:
+                Motor(LR.Upper_left, MD.Forward, speed);
+                Motor(LR.Upper_right, MD.Back, speed);
+                Motor(LR.Lower_left, MD.Forward, speed);
+                Motor(LR.Lower_right, MD.Back, speed);
+            break;
+        }
+    }
+
+    /**
+     * strafe robot
+     */
+    //% block="Strafe to $D at speed $speed\\%"
+    //% speed.min=0 speed.max=100
+    //% group="Motor" weight=95
+    export function Strafe(direction: StrafeDirection, speed: number) {
+        switch (direction) {
+            case StrafeDirection.Left:
+                Motor(LR.Upper_left, MD.Back, speed);
+                Motor(LR.Upper_right, MD.Forward, speed);
+                Motor(LR.Lower_left, MD.Forward, speed);
+                Motor(LR.Lower_right, MD.Back, speed);
+                break;
+            case StrafeDirection.Right:
+                Motor(LR.Upper_left, MD.Forward, speed);
+                Motor(LR.Upper_right, MD.Back, speed);
+                Motor(LR.Lower_left, MD.Back, speed);
+                Motor(LR.Lower_right, MD.Forward, speed);
+                break;
+        }
+    }
 
     /**
      * set car state
