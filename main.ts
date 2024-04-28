@@ -217,8 +217,8 @@ namespace mecanumRobotV2 {
     //% block="Drive to $D at speed $speed \\%"
     //% speed.min=0 speed.max=100
     //% group="Motor" weight=95
-    export function Drive(direction: DIR,  speed: number) {
-        switch (direction)
+    export function Drive(D: DIR,  speed: number) {
+        switch (D)
         {
             case DIR.Run_forward:
                 Motor(LR.Upper_left, MD.Forward, speed);
@@ -253,8 +253,8 @@ namespace mecanumRobotV2 {
     //% block="Strafe to $D at speed $speed\\%"
     //% speed.min=0 speed.max=100
     //% group="Motor" weight=95
-    export function Strafe(direction: StrafeDirection, speed: number) {
-        switch (direction) {
+    export function Strafe(D: StrafeDirection, speed: number) {
+        switch (D) {
             case StrafeDirection.Left:
                 Motor(LR.Upper_left, MD.Back, speed);
                 Motor(LR.Upper_right, MD.Forward, speed);
